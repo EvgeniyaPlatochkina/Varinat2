@@ -1,0 +1,134 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Variant2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="850" Height="700"
+        x:Class="Variant2.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Variant2">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	<Grid ShowGridLines="True">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.20*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="0.08*"/>
+			</Grid.RowDefinitions>
+
+			<StackPanel
+				Grid.Column="0"
+				Orientation="Horizontal"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Center">
+				<TextBox
+					Margin="27,3,0,0"
+					Height="47"
+					Width="400"
+					FontSize="20"
+					HorizontalContentAlignment="Left"
+					VerticalContentAlignment="Center"
+					Watermark="Введите для поиска"/>
+				
+				<ComboBox
+					Margin="17,3,0,0"
+					Width="200"
+					Height="47"
+					PlaceholderText="Сортировка"/>
+
+				<ComboBox
+					Margin="15,3,0,0"
+					Width="166"
+					Height="47"
+					PlaceholderText="Фильтрация"/>
+			</StackPanel>
+
+			<ListBox
+				Grid.Row="1"
+				Background="Transparent"
+				BorderThickness="0">
+				<ListBox.Styles>
+					<Style Selector="ListBoxItem">
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="ListBoxItem">
+									<Border
+										Name="border"
+										BorderBrush="Black"
+										BorderThickness="1"
+										Width="800"
+										Height="120"
+										Margin="0,0,0,15">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="0.2*"/>
+												<ColumnDefinition Width="*"/>
+												<ColumnDefinition Width="0.2*"/>
+											</Grid.ColumnDefinitions>
+											<Image Source="C:\Users\student\Documents\ISP19\Vtitbid.ISP19.Gorshunov\Variant2\Image\picture.png"
+												   Margin="10"
+												   Grid.Column="0"/>
+											
+											<Grid Grid.Column="1">
+												<Grid.RowDefinitions>
+													<RowDefinition Height="0.8*"/>
+													<RowDefinition Height="0.4*"/>
+													<RowDefinition Height="*"/>
+												</Grid.RowDefinitions>
+												<StackPanel
+													VerticalAlignment="Center"
+													HorizontalAlignment="Left"
+													Orientation="Horizontal">
+													<TextBlock
+														Text="Тип продукта"
+														FontSize="20"
+														Margin="23,17,0,0"/>
+													
+													<TextBlock 
+														Text="|"
+														FontSize="20"
+														Margin="5,17,5,0"/>
+
+													<TextBlock
+														Text="Наименование продукта"
+														FontSize="20"
+														Margin="0,17,0,0"/>
+												</StackPanel>
+												
+												<TextBlock
+													Grid.Row="1"
+													Text="Артикул"
+													Margin="23,0,0,0"/>
+
+												<StackPanel 
+													Grid.Row="2"
+													Margin="23,5,0,0"
+													Orientation="Horizontal">
+													<TextBlock
+														Text="Материалы: "/>
+													<TextBlock Text="материал1"/>
+												</StackPanel>
+											</Grid>
+											
+											<TextBlock
+												Grid.Column="2"
+												Text="Стоимость"
+												Margin="5,25,0,0"/>
+										</Grid>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</ListBox.Styles>
+				<TextBlock/>
+				<TextBlock/>
+				<TextBlock/>
+				<TextBlock/>
+			</ListBox>
+		</Grid>
+	</Grid>
+</Window>

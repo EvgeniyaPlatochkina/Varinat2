@@ -38,18 +38,25 @@
 					Background="#CEFFF9"/>
 
 				<ComboBox
+					Name="CbSort"
 					Margin="17,3,0,0"
 					Width="200"
 					Height="47"
 					PlaceholderText="Сортировка"
-					Background="#CEFFF9"/>
+					Background="#CEFFF9">
+					<ComboBoxItem Content="По типу продукта"/>
+					<ComboBoxItem Content="По наименованию продукта"/>
+					<ComboBoxItem Content="По артикулу"/>
+					<ComboBoxItem Content="По стоимости"/>
+				</ComboBox>
 
 				<ComboBox
 					Margin="15,3,0,0"
 					Width="166"
 					Height="47"
 					PlaceholderText="Фильтрация"
-					Background="#CEFFF9"/>
+					Background="#CEFFF9"
+					Items="{Binding FilteringList}"/>
 				
 			</StackPanel>
 
@@ -57,7 +64,7 @@
 				Grid.Row="1"
 				Background="Transparent"
 				BorderThickness="0"
-				Items="{Binding GetAllProducts}">
+				Items="{Binding ProductMaterialsList}">
 				<ListBox.Styles>
 					<Style Selector="ListBoxItem">
 						<Setter Property="Template">
@@ -80,7 +87,7 @@
 											</Grid.ColumnDefinitions>
 											<Image 
 												Name="image"
-												Source="{Binding Image}"
+												Source="{Binding Product.Image}"
 												Margin="10"
 												Grid.Column="0"/>
 											
@@ -95,7 +102,7 @@
 													HorizontalAlignment="Left"
 													Orientation="Horizontal">
 													<TextBlock
-														Text="{Binding ProductTypeId}"
+														Text="{Binding Product.ProductType.Title}"
 														FontSize="20"
 														Margin="23,17,0,0"/>
 													
@@ -105,14 +112,14 @@
 														Margin="5,17,5,0"/>
 
 													<TextBlock
-														Text="{Binding Title}"
+														Text="{Binding Product.Title}"
 														FontSize="20"
 														Margin="0,17,0,0"/>
 												</StackPanel>
 												
 												<TextBlock
 													Grid.Row="1"
-													Text="{Binding ArticleNumber}"
+													Text="{Binding Product.ArticleNumber}"
 													Margin="23,0,0,0"/>
 
 												<StackPanel 
@@ -121,12 +128,12 @@
 													Orientation="Horizontal">
 													<TextBlock
 														Text="Материалы: "/>
-													<TextBlock Text="материал1"/>
+													<TextBlock  Text="{Binding Material.Title}"/>
 												</StackPanel>
 											</Grid>											
 											<TextBlock
 												Grid.Column="2"
-												Text="Стоимость"
+												Text="{Binding Product.MinCostForAgent}"
 												Margin="5,25,0,0"/>
 										</Grid>
 									</Border>

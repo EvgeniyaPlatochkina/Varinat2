@@ -1,8 +1,16 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
+using HarfBuzzSharp;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
+using ReactiveUI;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
+using System.Windows.Input;
 using Variant2.Models;
+using Variant2.Views;
 
 namespace Variant2.ViewModels
 {
@@ -10,6 +18,7 @@ namespace Variant2.ViewModels
     {
         private List<string> _filteringList = new();
         private List<ProductMaterial> _productMaterialsList;
+        public AddNewRecord addNewRecord { get; set; } = new();
 
         public List<ProductMaterial> ProductMaterialsList
         {
@@ -20,6 +29,10 @@ namespace Variant2.ViewModels
 
         public MainWindowViewModel()
         {
+          
+
+            DoTheThing = ReactiveCommand.Create(RunTheThing);
+
             using (Gorshunov03Context db = new Gorshunov03Context())
             {
                 ProductMaterialsList = db.ProductMaterials
@@ -33,6 +46,14 @@ namespace Variant2.ViewModels
                     FilteringList.Add(item.Title);
                 }
             }
+        }
+
+
+        public ReactiveCommand<Unit, Unit> DoTheThing { get; }
+
+        void RunTheThing()
+        {
+            addNewRecord.Show();
         }
     }
 }

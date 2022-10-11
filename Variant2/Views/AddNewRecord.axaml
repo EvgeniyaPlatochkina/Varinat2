@@ -1,0 +1,47 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="425" Height="500"
+        x:Class="Variant2.Views.AddNewRecord"
+        Icon="\Assets\lopushok.ico"
+        Title="Лопушок">
+	<Grid>
+		<Image
+			Source="\Image\lopushok.png"
+			Opacity="0.3"/>
+		<StackPanel
+			Orientation="Vertical"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center">
+			<TextBlock 
+				Text="Продукт"
+				FontSize="15"/>
+			<ComboBox
+				Width="300"
+				PlaceholderText="Выберите продукт"
+				Background="#CEFFF9"/>
+			
+			<TextBlock 
+				Text="Материал"
+				FontSize="15"/>
+			<ComboBox
+				Width="300"
+				PlaceholderText="Выберите материал"
+				Background="#CEFFF9"/>
+
+			<TextBlock 
+				Text="Необходимое количество материала"
+				FontSize="15"/>
+			<TextBox
+				Width="300"
+				Watermark="Введите кол-во"
+				Background="#CEFFF9"/>
+			
+			<Button
+				HorizontalAlignment="Right"
+				Content="Добавить"
+				Margin="0,20,0,0"/>
+		</StackPanel>
+	</Grid>
+</Window>

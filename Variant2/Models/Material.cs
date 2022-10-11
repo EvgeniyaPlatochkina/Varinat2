@@ -26,6 +26,7 @@ namespace Variant2.Models
         public virtual MaterialType MaterialType { get; set; } = null!;
         public virtual ICollection<MaterialCountHistory> MaterialCountHistories { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
+
         public virtual ICollection<Supplier> Suppliers { get; set; }
     }
 }

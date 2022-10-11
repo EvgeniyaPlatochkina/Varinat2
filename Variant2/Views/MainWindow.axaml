@@ -12,9 +12,9 @@
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
 	<Grid>
-		<Image
-			Source="\Image\lopushok.png"
-			Opacity="0.3"/>
+		<Image Source="\Image\lopushok.png"
+			   Opacity="0.3"/>
+
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="0.20*"/>
@@ -60,11 +60,28 @@
 
 			</StackPanel>
 
-			<!--<ListBox
+			<ListBox
 				Grid.Row="1"
 				Background="Transparent"
 				BorderThickness="0"
-				Items="{Binding ProductMaterialsList}">
+				Items="{Binding Sorts}"
+				ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+				ScrollViewer.VerticalScrollBarVisibility="Hidden">
+				<ListBox.ContextMenu>
+					<ContextMenu>
+						<MenuItem
+							Header="Добавить"
+							Command="{Binding AddNewRecord}"/>
+
+						<MenuItem
+							Header="Редактировать"
+							Command="{Binding }"/>
+
+						<MenuItem
+							Header="Удалить"
+							Command="{Binding }"/>
+					</ContextMenu>
+				</ListBox.ContextMenu>
 				<ListBox.Styles>
 					<Style Selector="ListBoxItem">
 						<Setter Property="Template">
@@ -76,21 +93,20 @@
 										BorderThickness="1"
 										Width="800"
 										Height="120"
-										Margin="0,0,0,15"
-										Background="#CEFFF9">
-										
+										Margin="0,0,0,15">
+
 										<Grid>
 											<Grid.ColumnDefinitions>
 												<ColumnDefinition Width="0.2*"/>
 												<ColumnDefinition Width="*"/>
 												<ColumnDefinition Width="0.2*"/>
 											</Grid.ColumnDefinitions>
-											<Image 
+											<Image
 												Name="image"
-												Source="{Binding Product.Image}"
+												Source="{Binding Image}"
 												Margin="10"
 												Grid.Column="0"/>
-											
+
 											<Grid Grid.Column="1">
 												<Grid.RowDefinitions>
 													<RowDefinition Height="0.8*"/>
@@ -102,139 +118,55 @@
 													HorizontalAlignment="Left"
 													Orientation="Horizontal">
 													<TextBlock
-														Text="{Binding Product.ProductType.Title}"
+														Text="{Binding ProductTypeTitle}"
 														FontSize="20"
 														Margin="23,17,0,0"/>
-													
-													<TextBlock 
+
+													<TextBlock
 														Text="|"
 														FontSize="20"
 														Margin="5,17,5,0"/>
-
 													<TextBlock
-														Text="{Binding Product.Title}"
+														Text="{Binding ProductTitle}"
 														FontSize="20"
 														Margin="0,17,0,0"/>
 												</StackPanel>
-												
+
 												<TextBlock
 													Grid.Row="1"
-													Text="{Binding Product.ArticleNumber}"
+													Text="{Binding ArticleNumber}"
 													Margin="23,0,0,0"/>
-
-												<StackPanel 
+												<StackPanel
 													Grid.Row="2"
 													Margin="23,5,0,0"
 													Orientation="Horizontal">
 													<TextBlock
 														Text="Материалы: "/>
-													<TextBlock  Text="{Binding Material.Title}"/>
+													<TextBlock
+														Text="{Binding MaterialTitle}"
+														Width="520"
+														TextWrapping="WrapWithOverflow"/>
 												</StackPanel>
-											</Grid>											
+											</Grid>
 											<TextBlock
 												Grid.Column="2"
-												Text="{Binding Product.MinCostForAgent}"
+												Text="{Binding MinCostForAgent}"
 												Margin="5,25,0,0"/>
 										</Grid>
+										<Border.Styles>
+											<Style Selector="Border">
+												<Setter Property="Background" Value="#CEFFF9"/>
+											</Style>
+											<Style Selector="Border:pointerover">
+												<Setter Property="Background" Value="#00CC76"/>
+											</Style>
+										</Border.Styles>
 									</Border>
 								</ControlTemplate>
 							</Setter.Value>
-						</Setter>						
-					</Style>					
+						</Setter>
+					</Style>
 				</ListBox.Styles>
-			</ListBox>-->
-
-			<ListBox
-				Grid.Row="1"
-				Background="Transparent"
-				BorderThickness="0"
-				Items="{Binding ProductMaterialsList}">
-				<ListBox.ContextMenu>
-					<ContextMenu>
-						<MenuItem 
-							Header="Добавить"
-							Command="{Binding DoTheThing}"/>
-						
-						<MenuItem
-							Header="Редактировать"
-							Command="{Binding }"/>
-						
-						<MenuItem
-							Header="Удалить"
-							Command="{Binding }"/>
-					</ContextMenu>
-				</ListBox.ContextMenu>
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Border
-							Name="border"
-							BorderBrush="Black"
-							BorderThickness="1"
-							Width="800"
-							Height="120"
-							Margin="0,0,0,15"
-							Background="#CEFFF9">
-
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="0.2*"/>
-									<ColumnDefinition Width="*"/>
-									<ColumnDefinition Width="0.2*"/>
-								</Grid.ColumnDefinitions>
-								<Image
-									Name="image"
-									Source="{Binding Product.Image}"
-									Margin="10"
-									Grid.Column="0"/>
-
-								<Grid Grid.Column="1">
-									<Grid.RowDefinitions>
-										<RowDefinition Height="0.8*"/>
-										<RowDefinition Height="0.4*"/>
-										<RowDefinition Height="*"/>
-									</Grid.RowDefinitions>
-									<StackPanel
-										VerticalAlignment="Center"
-										HorizontalAlignment="Left"
-										Orientation="Horizontal">
-										<TextBlock
-											Text="{Binding Product.ProductType.Title}"
-											FontSize="20"
-											Margin="23,17,0,0"/>
-
-										<TextBlock
-											Text="|"
-											FontSize="20"
-											Margin="5,17,5,0"/>
-
-										<TextBlock
-											Text="{Binding Product.Title}"
-											FontSize="20"
-											Margin="0,17,0,0"/>
-									</StackPanel>
-
-									<TextBlock
-										Grid.Row="1"
-										Text="{Binding Product.ArticleNumber}"
-										Margin="23,0,0,0"/>
-
-									<StackPanel
-										Grid.Row="2"
-										Margin="23,5,0,0"
-										Orientation="Horizontal">
-										<TextBlock
-											Text="Материалы: "/>
-										<TextBlock  Text="{Binding Material.Title}"/>
-									</StackPanel>
-								</Grid>
-								<TextBlock
-									Grid.Column="2"
-									Text="{Binding Product.MinCostForAgent}"
-									Margin="5,25,0,0"/>
-							</Grid>
-						</Border>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
 			</ListBox>
 		</Grid>
 	</Grid>

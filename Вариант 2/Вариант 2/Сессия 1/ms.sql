@@ -1,3 +1,4 @@
+use Variant2
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -11,6 +12,7 @@ CREATE TABLE [dbo].[Agent](
 	[KPP] [varchar](9) NULL,
 	[DirectorName] [nvarchar](100) NULL,
 	[Phone] [nvarchar](20) NOT NULL,
+
 	[Email] [nvarchar](255) NULL,
 	[Logo] [nvarchar](100) NULL,
 	[Priority] [int] NOT NULL,

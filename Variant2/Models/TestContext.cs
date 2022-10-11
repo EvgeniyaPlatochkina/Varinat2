@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Variant2.Models
 {
-    public partial class Gorshunov03Context : DbContext
+    public partial class TestContext : DbContext
     {
-        public Gorshunov03Context()
+        public TestContext()
         {
         }
 
-        public Gorshunov03Context(DbContextOptions<Gorshunov03Context> options)
+        public TestContext(DbContextOptions<TestContext> options)
             : base(options)
         {
         }
@@ -35,7 +35,7 @@ namespace Variant2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=PC-233-03\\SQLEXPRESS;Database=Gorshunov03;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-LN93BF2\\SQLEXPRESS;Database=Test;Trusted_Connection=True;");
             }
         }
 

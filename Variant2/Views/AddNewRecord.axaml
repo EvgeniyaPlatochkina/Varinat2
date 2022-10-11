@@ -14,15 +14,15 @@
 			Orientation="Vertical"
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center">
-			<TextBlock 
+			<TextBlock
 				Text="Продукт"
 				FontSize="15"/>
 			<ComboBox
 				Width="300"
 				PlaceholderText="Выберите продукт"
 				Background="#CEFFF9"/>
-			
-			<TextBlock 
+
+			<TextBlock
 				Text="Материал"
 				FontSize="15"/>
 			<ComboBox
@@ -30,18 +30,19 @@
 				PlaceholderText="Выберите материал"
 				Background="#CEFFF9"/>
 
-			<TextBlock 
+			<TextBlock
 				Text="Необходимое количество материала"
 				FontSize="15"/>
 			<TextBox
 				Width="300"
 				Watermark="Введите кол-во"
 				Background="#CEFFF9"/>
-			
+
 			<Button
 				HorizontalAlignment="Right"
 				Content="Добавить"
 				Margin="0,20,0,0"/>
+			
 		</StackPanel>
 	</Grid>
 </Window>

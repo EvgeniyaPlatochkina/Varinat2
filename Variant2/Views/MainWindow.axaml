@@ -28,6 +28,7 @@
 				HorizontalAlignment="Left"
 				VerticalAlignment="Center">
 				<TextBox
+					
 					Margin="27,3,0,0"
 					Height="47"
 					Width="400"
@@ -43,7 +44,8 @@
 					Width="200"
 					Height="47"
 					PlaceholderText="Сортировка"
-					Background="#CEFFF9">
+					Background="#CEFFF9"
+					>
 					<ComboBoxItem Content="По типу продукта"/>
 					<ComboBoxItem Content="По наименованию продукта"/>
 					<ComboBoxItem Content="По артикулу"/>
@@ -56,7 +58,9 @@
 					Height="47"
 					PlaceholderText="Фильтрация"
 					Background="#CEFFF9"
-					Items="{Binding FilteringList}"/>
+					SelectedItem="{Binding Filtering}"
+					Items="{Binding FilteringList}">
+				</ComboBox>
 
 			</StackPanel>
 

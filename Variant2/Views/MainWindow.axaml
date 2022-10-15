@@ -28,7 +28,6 @@
 				HorizontalAlignment="Left"
 				VerticalAlignment="Center">
 				<TextBox
-					
 					Margin="27,3,0,0"
 					Height="47"
 					Width="400"
@@ -36,7 +35,8 @@
 					HorizontalContentAlignment="Left"
 					VerticalContentAlignment="Center"
 					Watermark="Введите для поиска"
-					Background="#CEFFF9"/>
+					Background="#CEFFF9"
+					Text="{Binding Search}"/>
 
 				<ComboBox
 					Name="CbSort"
@@ -45,12 +45,8 @@
 					Height="47"
 					PlaceholderText="Сортировка"
 					Background="#CEFFF9"
-					>
-					<ComboBoxItem Content="По типу продукта"/>
-					<ComboBoxItem Content="По наименованию продукта"/>
-					<ComboBoxItem Content="По артикулу"/>
-					<ComboBoxItem Content="По стоимости"/>
-				</ComboBox>
+					SelectedItem="{Binding SelectedSortingItem}"
+					Items="{Binding SortingList}"/>
 
 				<ComboBox
 					Margin="15,3,0,0"
@@ -58,9 +54,8 @@
 					Height="47"
 					PlaceholderText="Фильтрация"
 					Background="#CEFFF9"
-					SelectedItem="{Binding Filtering}"
-					Items="{Binding FilteringList}">
-				</ComboBox>
+					SelectedItem="{Binding SelectedFilteringItem}"
+					Items="{Binding FilteringList}"/>
 
 			</StackPanel>
 

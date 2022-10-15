@@ -10,9 +10,6 @@
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
-    <None Remove="Assets\lopushok.ico" />
-    <None Remove="Image\lopushok.png" />
-    <None Remove="Image\picture.png" />
     <None Remove="products\paper_0.jpeg" />
     <None Remove="products\paper_1.jpeg" />
     <None Remove="products\paper_10.jpeg" />
@@ -124,7 +121,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="products\picture.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -34,7 +34,7 @@ namespace Variant2.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-LN93BF2\\SQLEXPRESS;Database=Test;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=PC-232-03\\SQLEXPRESS;Database=Gorshunov03;Trusted_Connection=True;");
             }
         }
 

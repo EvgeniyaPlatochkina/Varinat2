@@ -8,37 +8,78 @@ using System.Linq;
 using System.Reactive;
 using Variant2.Models;
 using Variant2.Views;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Variant2.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         private List<string> _filteringList = new();
+        private List<string> _sortingList = new();
         private List<ProductMaterial> _productMaterialsList;
         private List<Sort> _sorts = new();
-        private List<Sort> _publicList = new();
-        private string _filtering;
+        private List<Sort> _searchList = new();
 
-        #region Свойства
-        public List<Sort> PublicList
+        public List<Sort> SearchList
         {
-            get { return _publicList; }
-            set { _publicList = value; }
+            get { return _searchList; }
+            set { _searchList = value; }
         }
-        public string Filtering
+
+        private List<Sort> _publicList = new();
+        private string _selectedFilteringItem;
+        private string _selectedSortingItem;
+        private string _search;
+
+        public string Search
         {
-            get
-            { return _filtering; }
-            set
+            get => _search;
+            set 
             {
-                _filtering = value;
-                Sorts = PublicList.Where(p => p.ProductTypeTitle == value).ToList();
-                if (value == "Все продукты")
+                _search = value;
+                Sorts = Sorts
+                    .Where(p => p.ProductTitle.ToLower().Contains(value.ToLower()))
+                    .ToList();
+
+                if (Sorts.Count() == 0)
                 {
-                    Sorts = PublicList;
+
                 }
             }
         }
+
+
+        #region Свойства
+        public List<string> FilteringList
+        {
+            get => _filteringList;
+            set
+            {
+                _filteringList = value;
+                OnPropertyChanged(nameof(FilteringList));
+            }
+        }
+
+        public List<string> SortingList
+        {
+            get => _sortingList;
+            set
+            {
+                _sortingList = value;
+                OnPropertyChanged(nameof(SortingList));
+            }
+        }
+
+        public List<ProductMaterial> ProductMaterialsList
+        {
+            get => _productMaterialsList;
+            set 
+            { 
+                _productMaterialsList = value;
+                OnPropertyChanged(nameof(ProductMaterialsList));
+            }
+        }
+
         public List<Sort> Sorts
         {
             get => _sorts;
@@ -48,19 +89,48 @@ namespace Variant2.ViewModels
                 OnPropertyChanged(nameof(Sorts));
             }
         }
-        public List<ProductMaterial> ProductMaterialsList
+
+        public List<Sort> PublicList
         {
-            get => _productMaterialsList;
-            set { _productMaterialsList = value; }
+            get => _publicList;
+            set
+            {
+                _publicList = value;
+                OnPropertyChanged(nameof(PublicList));
+            }
         }
-        public List<string> FilteringList
+
+        public string SelectedFilteringItem
         {
-            get => _filteringList;
-            set => _filteringList = value;
+            get => _selectedFilteringItem;
+            set
+            {
+                _selectedFilteringItem = value;
+                Filtering(value);
+                OnPropertyChanged(nameof(SelectedFilteringItem));
+            }
+        }
+
+        public string SelectedSortingItem
+        {
+            get => _selectedSortingItem;
+            set
+            {
+                _selectedSortingItem = value;
+                Sorting(value);
+                OnPropertyChanged(nameof(SelectedSortingItem));
+            }
         }
         #endregion
 
         public MainWindowViewModel()
+        {
+            CteateSortingAndFilteringList();
+            CreatePublicList();
+            AddNewRecord = ReactiveCommand.Create(OpenAddNewRecord);
+        }   
+
+        private void CteateSortingAndFilteringList()
         {
             using (TestContext db = new TestContext())
             {
@@ -69,7 +139,17 @@ namespace Variant2.ViewModels
                 {
                     FilteringList.Add(item.Title);
                 }
+            }
+            SortingList.Add("По названию продукта");
+            SortingList.Add("По типу продукта");
+            SortingList.Add("По стоимость");
+            SortingList.Add("По артикулу");
+        }
 
+        private void CreatePublicList()
+        {
+            using (TestContext db = new TestContext())
+            {
                 ProductMaterialsList = db.ProductMaterials
                     .Include(m => m.Material)
                     .Include(p => p.Product)
@@ -107,7 +187,37 @@ namespace Variant2.ViewModels
                 }
                 PublicList = Sorts;
             }
-            AddNewRecord = ReactiveCommand.Create(OpenAddNewRecord);
+        }
+
+        private void Sorting(string str)
+        {
+            var list = Sorts;
+            if (str == "По типу продукта")
+            {
+                Sorts = list.OrderBy(p => p.ProductTypeTitle).ToList();
+            }
+            else if (str == "По названию продукта")
+            {
+                Sorts = list.OrderBy(p => p.ProductTitle).ToList();
+            }
+            else if (str == "По стоимость")
+            {
+                Sorts = list.OrderBy(p => p.MinCostForAgent).ToList();
+            }
+            else if (str == "По артикулу")
+            {
+                Sorts = list.OrderBy(p => p.ArticleNumber).ToList();
+            }
+        }
+
+        private void Filtering(string str)
+        {
+            Sorts = PublicList.Where(p => p.ProductTypeTitle == str).ToList();
+            if (str == "Все продукты")
+            {
+                Sorts = PublicList;
+            }
+            SelectedSortingItem = "По названию продукта";
         }
 
         public ReactiveCommand<Unit, Unit> AddNewRecord { get; }

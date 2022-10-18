@@ -9,6 +9,7 @@ namespace Variant2.Views
         public AddNewRecord()
         {
             InitializeComponent();
+            DataContext = new AddNewRecordViewModel();
         }
     }
 }

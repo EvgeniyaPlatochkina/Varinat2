@@ -18,36 +18,10 @@ namespace Variant2.ViewModels
         private List<string> _sortingList = new();
         private List<ProductMaterial> _productMaterialsList;
         private List<Sort> _sorts = new();
-        private List<Sort> _searchList = new();
-
-        public List<Sort> SearchList
-        {
-            get { return _searchList; }
-            set { _searchList = value; }
-        }
-
         private List<Sort> _publicList = new();
         private string _selectedFilteringItem;
         private string _selectedSortingItem;
         private string _search;
-
-        public string Search
-        {
-            get => _search;
-            set 
-            {
-                _search = value;
-                Sorts = Sorts
-                    .Where(p => p.ProductTitle.ToLower().Contains(value.ToLower()))
-                    .ToList();
-
-                if (Sorts.Count() == 0)
-                {
-
-                }
-            }
-        }
-
 
         #region Свойства
         public List<string> FilteringList
@@ -121,6 +95,18 @@ namespace Variant2.ViewModels
                 OnPropertyChanged(nameof(SelectedSortingItem));
             }
         }
+
+        public string Search
+        {
+            get => _search;
+            set
+            {
+                _search = value;
+                Sorts = PublicList
+                    .Where(p => p.ProductTitle.ToLower().Contains(value.ToLower()))
+                    .ToList();
+            }
+        }
         #endregion
 
         public MainWindowViewModel()
@@ -192,7 +178,7 @@ namespace Variant2.ViewModels
         private void Sorting(string str)
         {
             var list = Sorts;
-            if (str == "По типу продукта")
+            if (str == "По типу продукта" || str == "")
             {
                 Sorts = list.OrderBy(p => p.ProductTypeTitle).ToList();
             }
@@ -217,7 +203,7 @@ namespace Variant2.ViewModels
             {
                 Sorts = PublicList;
             }
-            SelectedSortingItem = "По названию продукта";
+            SelectedSortingItem = _selectedSortingItem;
         }
 
         public ReactiveCommand<Unit, Unit> AddNewRecord { get; }
